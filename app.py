@@ -5,10 +5,11 @@ import tempfile
 import cv2
 import os
 
-st.title("🎯 YOLOv8 Object Detection App")
-st.write("Upload an image and let YOLOv8 detect objects in it!")
+@st.cache_resource
+def load_model():
+    return YOLO("yolov8n.pt")
 
-model = YOLO("yolov8n.pt")  # Pretrained YOLOv8 model
+model = load_model()
 
 uploaded_file = st.file_uploader("📸 Upload an image", type=["jpg", "jpeg", "png"])
 
